@@ -73,7 +73,7 @@ if (!is_null($pdata)) {
 
         if ($exists) {
             $flag = 0;
-            if (++$count >= $threshold && !in_array($ipaddr,$whitelist)) {
+            if (++$count >= $threshold && !in_array($ipaddr, $whitelist)) {
                 $flag = 1;
             }
             $query = "UPDATE IPLOG SET REQUESTDATA=\"$postdata\", UPDATED_ON=".time().", COUNT=".$count.", FLAGGED=".$flag." WHERE ID=$id";
@@ -89,8 +89,10 @@ if (!is_null($pdata)) {
         $error = "All fields are required.";
     }
 
-    if ($success) {
+    if (isset($success)) {
         echo '<div class="msg success">'.$success.'</div>';
+    } elseif (isset($error)) {
+        echo '<div class="msg error">'.$error.'</div>';
     }
 }
 $sqli->close();
