@@ -1,6 +1,6 @@
 <?php
 /* Initialize Sqlite DB */
-$sqli = new SQLite3("../common/$dbfilename");
+$sqli = new SQLite3("$path/common/$dbfilename");
 if (!$sqli) {
     die("err1");
 }

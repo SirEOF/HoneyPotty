@@ -46,7 +46,8 @@
 </html>
 
 <?php
-require_once("../common/common.php");
+$path = dirname(__DIR__);
+require_once("$path/common/common.php");
 
 $pdata = filter_input_array(INPUT_POST);
 

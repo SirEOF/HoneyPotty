@@ -1,10 +1,11 @@
 <?php
-require_once "../common/common.php";
+$path = dirname(__DIR__);
+require_once "$path/common/common.php";
 
 echo "Please run: iptables -N honeypot; iptables -I INPUT -j honeypot; before running this or it will NOT work".PHP_EOL;
 echo "Although it might not be secure, run this script as root in order to add the rules to your firewall, set it as a */1 cron for example".PHP_EOL;
 $apply = false;
-if ($argv[1] === "apply") {
+if (isset($argv[1]) && $argv[1] === "apply") {
     if(posix_getuid() !== 0 )
     {
         echo "Sicne you are not running this as root, all execs will eventually fail.".PHP_EOL;
