@@ -2,7 +2,7 @@
 $path = dirname(__DIR__);
 require_once "$path/common/common.php";
 
-echo "Please run: iptables -N honeypot;iptables -I INPUT -j honeyput -p tcp -m multiport --dport 80; before running this or it will NOT work".PHP_EOL;
+echo "Please run: iptables -N honeypot;iptables -I INPUT -j honeypot -p tcp -m multiport --dport 80; before running this or it will NOT work".PHP_EOL;
 echo "Although it might not be secure, run this script as root in order to add the rules to your firewall, set it as a */1 cron for example".PHP_EOL;
 $apply = false;
 if (isset($argv[1]) && $argv[1] === "apply") {
@@ -23,7 +23,7 @@ if ($apply) {
 }
 
 while ($row = $ret->fetchArray(SQLITE3_ASSOC)) {
-    $cmd = "$iptpath -A honeyput -s ".$row["IPADDR"]."/32 -j REJECT --reject-with icmp-port-unreachable".PHP_EOL;
+    $cmd = "$iptpath -A honeypot -s ".$row["IPADDR"]."/32 -j REJECT --reject-with icmp-port-unreachable".PHP_EOL;
     /* Debug */
     if ($row["IPADDR"] === "127.0.0.1") {
         echo "This command will never run as it will break local connections".PHP_EOL;
