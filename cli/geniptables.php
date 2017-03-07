@@ -28,7 +28,10 @@ while ($row = $ret->fetchArray(SQLITE3_ASSOC)) {
     if ($row["IPADDR"] === "127.0.0.1") {
         echo "This command will never run as it will break local connections".PHP_EOL;
     } else {
-        shell_exec($cmd);
+        if($apply)
+        {
+            shell_exec($cmd);
+        }
     }
     echo $cmd;
 }
