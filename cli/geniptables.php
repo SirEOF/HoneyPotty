@@ -6,8 +6,7 @@ echo "Please run: iptables -N honeypot;iptables -I INPUT -j honeypot -p tcp -m m
 echo "Although it might not be secure, run this script as root in order to add the rules to your firewall, set it as a */1 cron for example".PHP_EOL;
 $apply = false;
 if (isset($argv[1]) && $argv[1] === "apply") {
-    if(posix_getuid() !== 0 )
-    {
+    if (posix_getuid() !== 0) {
         echo "Sicne you are not running this as root, all execs will eventually fail.".PHP_EOL;
     }
     $apply = true;
@@ -27,11 +26,8 @@ while ($row = $ret->fetchArray(SQLITE3_ASSOC)) {
     /* Debug */
     if ($row["IPADDR"] === "127.0.0.1") {
         echo "This command will never run as it will break local connections".PHP_EOL;
-    } else {
-        if($apply)
-        {
-            shell_exec($cmd);
-        }
+    } elseif ($apply) {
+        shell_exec($cmd);
     }
     echo $cmd;
 }
