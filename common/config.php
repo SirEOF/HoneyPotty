@@ -9,3 +9,8 @@ ini_set('error_reporting', E_ALL);
 $dbfilename = "iplog.db";
 $geoloc     = false;
 $threshold  = 3;
+if(file_exists($file = "$path/common/whitelist.ini"))
+{
+    $wl_ini = parse_ini_file($file);
+    $whitelist = explode(",", trim($wl_ini['whitelist']));
+}

@@ -73,7 +73,7 @@ if (!is_null($pdata)) {
 
         if ($exists) {
             $flag = 0;
-            if (++$count >= $threshold) {
+            if (++$count >= $threshold && !in_array($ipaddr,$whitelist)) {
                 $flag = 1;
             }
             $query = "UPDATE IPLOG SET REQUESTDATA=\"$postdata\", UPDATED_ON=".time().", COUNT=".$count.", FLAGGED=".$flag." WHERE ID=$id";
